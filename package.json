@@ -1,9 +1,9 @@
 {
-  "name": "my-v0-project",
+  "name": "ai-novel-studio",
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=20.0.0",
+    "node": "22.x",
     "pnpm": ">=9.0.0"
   },
   "scripts": {
