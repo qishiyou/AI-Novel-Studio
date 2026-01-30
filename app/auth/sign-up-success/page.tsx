@@ -38,7 +38,9 @@ export default function SignUpSuccessPage() {
         <CardFooter className="flex flex-col gap-3">
           <Button asChild variant="outline" className="w-full bg-transparent">
             <Link href="/auth/login">
-              <BookOpen className="w-4 h-4 mr-2" />
+              <div className="w-4 h-4 mr-2 overflow-hidden rounded-sm flex items-center justify-center">
+                <img src="/logo.png" alt="Logo" className="w-full h-full object-cover" />
+              </div>
               返回登录
             </Link>
           </Button>
