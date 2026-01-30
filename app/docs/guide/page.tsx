@@ -11,91 +11,127 @@ export default function GuidePage() {
       <Navbar />
       
       <main className="max-w-4xl mx-auto px-6 pt-32 pb-20">
-        <div className="space-y-4 mb-16">
+        <div className="space-y-4 mb-16 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">使用指南</h1>
-          <p className="text-xl text-muted-foreground font-light">
+          <p className="text-xl text-muted-foreground font-light max-w-2xl mx-auto">
             欢迎来到 AI Novel Studio。本指南将帮助您快速上手，开启您的 AI 驱动创作之旅。
           </p>
         </div>
 
 
-        <div className="space-y-20">
+        <div className="grid gap-12 md:grid-cols-2">
           {/* Step 1 */}
-          <section className="space-y-6">
+          <section className="space-y-6 p-6 rounded-2xl bg-card border border-border/50 hover:border-emerald-500/20 transition-all duration-300">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 shrink-0">
                 <Sparkles className="w-6 h-6" />
               </div>
-              <h2 className="text-2xl font-bold text-foreground">1. 构思创意</h2>
+              <h2 className="text-xl font-bold text-foreground">1. 构思创意</h2>
             </div>
-            <div className="pl-16 space-y-4">
-              <p className="leading-relaxed text-muted-foreground">
+            <div className="space-y-4">
+              <p className="leading-relaxed text-muted-foreground text-sm">
                 一切从一个简单的想法开始。您可以输入一个简短的故事简介、特定的主题、或者您想要探索的冲突。AI 将根据您的输入，为您提供初步的故事大纲和角色设定建议。
               </p>
-              <ul className="list-disc list-inside space-y-2 text-muted-foreground/80">
-                <li>输入故事的核心概念</li>
-                <li>选择您喜欢的类型（玄幻、都市、科幻等）</li>
-                <li>设定故事的整体基调</li>
+              <ul className="space-y-2 text-sm text-muted-foreground/80">
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50" />
+                  输入故事的核心概念
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50" />
+                  选择您喜欢的类型（玄幻、都市等）
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50" />
+                  设定故事的整体基调
+                </li>
               </ul>
             </div>
           </section>
 
           {/* Step 2 */}
-          <section className="space-y-6">
+          <section className="space-y-6 p-6 rounded-2xl bg-card border border-border/50 hover:border-orange-500/20 transition-all duration-300">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500">
+              <div className="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 shrink-0">
                 <Layers className="w-6 h-6" />
               </div>
-              <h2 className="text-2xl font-bold text-foreground">2. 构建大纲</h2>
+              <h2 className="text-xl font-bold text-foreground">2. 构建大纲</h2>
             </div>
-            <div className="pl-16 space-y-4">
-              <p className="leading-relaxed text-muted-foreground">
+            <div className="space-y-4">
+              <p className="leading-relaxed text-muted-foreground text-sm">
                 使用我们强大的大纲管理工具。AI 会根据您的创意生成结构化的章节建议。您可以自由调整章节顺序，添加关键情节，或者让 AI 为特定章节生成更详细的子大纲。
               </p>
-              <ul className="list-disc list-inside space-y-2 text-muted-foreground/80">
-                <li>自动生成多级大纲</li>
-                <li>灵活拖拽调整结构</li>
-                <li>设定每个章节的写作目标</li>
+              <ul className="space-y-2 text-sm text-muted-foreground/80">
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500/50" />
+                  自动生成多级大纲
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500/50" />
+                  灵活拖拽调整结构
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500/50" />
+                  设定每个章节的写作目标
+                </li>
               </ul>
             </div>
           </section>
 
           {/* Step 3 */}
-          <section className="space-y-6">
+          <section className="space-y-6 p-6 rounded-2xl bg-card border border-border/50 hover:border-blue-500/20 transition-all duration-300">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-500">
+              <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-500 shrink-0">
                 <PenTool className="w-6 h-6" />
               </div>
-              <h2 className="text-2xl font-bold text-foreground">3. 智能写作</h2>
+              <h2 className="text-xl font-bold text-foreground">3. 智能写作</h2>
             </div>
-            <div className="pl-16 space-y-4">
-              <p className="leading-relaxed text-muted-foreground">
+            <div className="space-y-4">
+              <p className="leading-relaxed text-muted-foreground text-sm">
                 进入核心写作界面。您可以手动写作，或者利用 AI 辅助功能：续写、扩写、改写，甚至让 AI 帮您描写复杂的动作场景或优美的环境描写。
               </p>
-              <ul className="list-disc list-inside space-y-2 text-muted-foreground/80">
-                <li>AI 续写与智能建议</li>
-                <li>沉浸式写作环境</li>
-                <li>实时字数统计与进度追踪</li>
+              <ul className="space-y-2 text-sm text-muted-foreground/80">
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500/50" />
+                  AI 续写与智能建议
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500/50" />
+                  沉浸式写作环境
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500/50" />
+                  实时字数统计与进度追踪
+                </li>
               </ul>
             </div>
           </section>
 
           {/* Step 4 */}
-          <section className="space-y-6">
+          <section className="space-y-6 p-6 rounded-2xl bg-card border border-border/50 hover:border-purple-500/20 transition-all duration-300">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-500">
+              <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-500 shrink-0">
                 <Download className="w-6 h-6" />
               </div>
-              <h2 className="text-2xl font-bold text-foreground">4. 导出与发布</h2>
+              <h2 className="text-xl font-bold text-foreground">4. 导出与发布</h2>
             </div>
-            <div className="pl-16 space-y-4">
-              <p className="leading-relaxed text-muted-foreground">
+            <div className="space-y-4">
+              <p className="leading-relaxed text-muted-foreground text-sm">
                 完成作品后，您可以一键导出为多种格式。我们支持主流的小说平台格式要求，让您的发布过程更加顺畅。
               </p>
-              <ul className="list-disc list-inside space-y-2 text-muted-foreground/80">
-                <li>支持 Word、PDF、EPUB 等格式</li>
-                <li>平台适配导出优化</li>
-                <li>云端永久保存，随时取用</li>
+              <ul className="space-y-2 text-sm text-muted-foreground/80">
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-purple-500/50" />
+                  支持 Word、PDF、EPUB 等格式
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-purple-500/50" />
+                  平台适配导出优化
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-purple-500/50" />
+                  云端永久保存，随时取用
+                </li>
               </ul>
             </div>
           </section>
