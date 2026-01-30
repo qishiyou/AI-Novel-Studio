@@ -54,7 +54,7 @@ export function Footer() {
                 <a href="#" className="w-9 h-9 rounded-lg bg-secondary hover:bg-secondary/80 flex items-center justify-center transition-colors group">
                   <Twitter className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
                 </a>
-                <a href="#" className="w-9 h-9 rounded-lg bg-secondary hover:bg-secondary/80 flex items-center justify-center transition-colors group">
+                <a href="mailto:blacklaw@foxmail.com" className="w-9 h-9 rounded-lg bg-secondary hover:bg-secondary/80 flex items-center justify-center transition-colors group">
                   <Mail className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
                 </a>
               </div>

@@ -82,7 +82,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-foreground mb-1">官方邮箱</h3>
-                  <p className="text-muted-foreground">support@ainovelstudio.com</p>
+                  <p className="text-muted-foreground">blacklaw@foxmail.com</p>
                 </div>
               </div>
 
