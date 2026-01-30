@@ -35,8 +35,8 @@ export function Footer() {
             {/* Brand */}
             <div className="lg:col-span-1">
               <Link href="/" className="flex items-center gap-3 group mb-6">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                  <BookOpen className="w-6 h-6 text-primary-foreground" />
+                <div className="w-12 h-12 rounded-xl overflow-hidden flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                  <img src="/logo.svg" alt="Logo" className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <span className="font-bold text-lg text-foreground">AI Novel Studio</span>

@@ -33,17 +33,17 @@ export function Navbar() {
         : "bg-gradient-to-b from-background/50 to-transparent"
     )}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="h-16 flex items-center justify-between">
+        <div className="h-20 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/25">
-                <BookOpen className="w-5 h-5 text-primary-foreground" />
+              <div className="w-11 h-11 rounded-xl overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/25">
+                <img src="/logo.svg" alt="Logo" className="w-full h-full object-cover" />
               </div>
               <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-accent animate-pulse" />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-foreground tracking-tight">AI Novel Studio</span>
+              <span className="font-bold text-lg text-foreground tracking-tight">AI Novel Studio</span>
               <span className="text-[10px] text-muted-foreground -mt-0.5">智能小说创作平台</span>
             </div>
           </Link>
@@ -54,7 +54,7 @@ export function Navbar() {
               <Link 
                 key={link.href}
                 href={link.href} 
-                className="relative px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-all duration-300 rounded-lg hover:bg-secondary/50 group"
+                className="relative px-4 py-2 text-[15px] font-semibold text-muted-foreground/90 hover:text-foreground transition-all duration-300 rounded-lg hover:bg-secondary/50 group"
               >
                 {link.label}
                 <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-300 group-hover:w-1/2" />
@@ -64,13 +64,13 @@ export function Navbar() {
           
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-2">
-            <Button asChild variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+            <Button asChild variant="ghost" className="font-semibold text-muted-foreground hover:text-foreground">
               <Link href="/auth/login">
                 <LogIn className="w-4 h-4 mr-2" />
                 登录
               </Link>
             </Button>
-            <Button asChild size="sm" className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300">
+            <Button asChild className="h-11 px-6 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300 font-bold">
               <Link href="/dashboard" className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4" />
                 开始创作
@@ -103,7 +103,7 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-3 text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
+              className="block px-4 py-3 text-[15px] font-semibold text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
             >
               {link.label}
             </Link>

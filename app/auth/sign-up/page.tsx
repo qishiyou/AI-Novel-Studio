@@ -80,11 +80,11 @@ export default function SignUpPage() {
 
       {/* Left Side - Visual Area */}
       <div className="hidden lg:flex flex-col justify-center items-end p-16 text-white relative z-10">
-        <div className="space-y-12 max-w-xl pr-12">
+        <div className="space-y-12 max-w-xl pr-0">
           {/* Logo */}
           <div className="flex items-center gap-3 font-bold text-2xl group cursor-default">
-            <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.3)] group-hover:scale-110 transition-transform duration-300">
-              <BookOpen className="w-6 h-6 text-zinc-950" />
+            <div className="w-10 h-10 overflow-hidden flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <img src="/logo.svg" alt="Logo" className="w-full h-full object-cover" />
             </div>
             <span className="tracking-tight">AI Novel Studio</span>
           </div>
