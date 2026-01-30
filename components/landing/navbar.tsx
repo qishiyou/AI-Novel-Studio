@@ -37,8 +37,8 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative">
-              <div className="w-11 h-11 rounded-xl overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/25">
-                <img src="/logo.png" alt="Logo" className="w-full h-full object-cover" />
+              <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/25">
+                <img src="/logo.png" alt="Logo" className="w-7 h-7 object-contain" />
               </div>
               <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-accent animate-pulse" />
             </div>

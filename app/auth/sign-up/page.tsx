@@ -83,8 +83,8 @@ export default function SignUpPage() {
         <div className="space-y-12 max-w-xl pr-0">
           {/* Logo */}
           <div className="flex items-center gap-3 font-bold text-2xl group cursor-default">
-            <div className="w-10 h-10 overflow-hidden flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              <img src="/logo.png" alt="Logo" className="w-full h-full object-cover" />
+            <div className="w-10 h-10 bg-emerald-500/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <img src="/logo.png" alt="Logo" className="w-7 h-7 object-contain" />
             </div>
             <span className="tracking-tight">AI Novel Studio</span>
           </div>

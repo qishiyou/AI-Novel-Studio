@@ -123,8 +123,8 @@ export default function CreatePage() {
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center">
-              <img src="/logo.png" alt="Logo" className="w-full h-full object-cover" />
+            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+              <img src="/logo.png" alt="Logo" className="w-5 h-5 object-contain" />
             </div>
             <span className="font-semibold text-foreground text-sm">AI Novel Studio</span>
           </Link>

@@ -25,8 +25,8 @@ export function CTASection() {
           
           {/* Floating icons */}
           <div className={`absolute top-8 left-8 transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-            <div className="p-3 bg-primary/10 rounded-xl animate-[float_6s_ease-in-out_infinite] overflow-hidden">
-              <img src="/logo.png" alt="Logo" className="w-full h-full object-cover" />
+            <div className="p-3 bg-primary/10 rounded-xl animate-[float_6s_ease-in-out_infinite] flex items-center justify-center">
+              <img src="/logo.png" alt="Logo" className="w-5 h-5 object-contain" />
             </div>
           </div>
           <div className={`absolute top-12 right-12 transition-all duration-1000 delay-200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
