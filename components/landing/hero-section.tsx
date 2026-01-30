@@ -28,7 +28,7 @@ export function HeroSection() {
       {/* Floating elements */}
       <div className={`absolute top-32 left-[15%] transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="p-3 bg-card/50 backdrop-blur-sm rounded-xl border border-border/50 animate-[float_6s_ease-in-out_infinite] flex items-center justify-center">
-          <img src="/logo.png" alt="Logo" className="w-6 h-6 object-contain" />
+          <img src="/logo.png" alt="Logo" className="w-10 h-10 object-contain" />
         </div>
       </div>
       <div className={`absolute top-48 right-[12%] transition-all duration-1000 delay-200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>

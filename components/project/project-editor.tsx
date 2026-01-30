@@ -847,7 +847,7 @@ export function ProjectEditor({ project, structure: initialStructure, characters
               <Card className="bg-card/50 border-border/50">
                 <CardHeader className="text-center">
                   <div className="mx-auto w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
-                    <img src="/logo.png" alt="Logo" className="w-10 h-10 object-contain" />
+                    <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
                   </div>
                   <CardTitle>生成故事架构</CardTitle>
                   <CardDescription>

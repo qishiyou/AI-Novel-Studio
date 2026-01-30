@@ -124,7 +124,7 @@ export default function CreatePage() {
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-              <img src="/logo.png" alt="Logo" className="w-5 h-5 object-contain" />
+              <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
             </div>
             <span className="font-semibold text-foreground text-sm">AI Novel Studio</span>
           </Link>

@@ -36,7 +36,7 @@ export function Footer() {
             <div className="lg:col-span-1">
               <Link href="/" className="flex items-center gap-3 group mb-6">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                  <img src="/logo.png" alt="Logo" className="w-8 h-8 object-contain" />
+                  <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
                 </div>
                 <div>
                   <span className="font-bold text-lg text-foreground">AI Novel Studio</span>

@@ -129,7 +129,7 @@ export function DashboardClient({ user, profile, projects, stats }: DashboardCli
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
-              <img src="/logo.png" alt="Logo" className="w-6 h-6 object-contain" />
+              <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
             </div>
             <span className="font-semibold text-foreground">AI Novel Studio</span>
           </Link>
@@ -173,7 +173,7 @@ export function DashboardClient({ user, profile, projects, stats }: DashboardCli
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <img src="/logo.png" alt="Logo" className="w-6 h-6 object-contain" />
+                  <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-foreground">{stats.totalProjects}</p>
@@ -241,7 +241,7 @@ export function DashboardClient({ user, profile, projects, stats }: DashboardCli
           <Card className="bg-card/50 border-border/50 border-dashed">
             <CardContent className="flex flex-col items-center justify-center py-16">
               <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
-                <img src="/logo.png" alt="Logo" className="w-10 h-10 object-contain" />
+                <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
               </div>
               <h3 className="text-lg font-semibold text-foreground mb-2">开始你的第一部小说</h3>
               <p className="text-muted-foreground text-center mb-6 max-w-sm">
