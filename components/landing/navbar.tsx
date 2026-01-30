@@ -7,9 +7,12 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
 const navLinks = [
-  { href: '#features', label: '功能特点' },
-  { href: '#workflow', label: '创作流程' },
-  { href: '#genres', label: '支持类型' },
+  { href: '/#features', label: '功能特点' },
+  { href: '/#workflow', label: '创作流程' },
+  { href: '/#genres', label: '支持类型' },
+  { href: '/docs/guide', label: '使用指南' },
+  { href: '/docs/faq', label: '常见问题' },
+  { href: '/contact', label: '联系我们' },
 ]
 
 export function Navbar() {

@@ -11,13 +11,13 @@ const footerLinks = {
     { label: '开始创作', href: '/dashboard' },
   ],
   support: [
-    { label: '使用指南', href: '#' },
-    { label: '常见问题', href: '#' },
-    { label: '联系我们', href: '#' },
+    { label: '使用指南', href: '/docs/guide' },
+    { label: '常见问题', href: '/docs/faq' },
+    { label: '联系我们', href: '/contact' },
   ],
   legal: [
-    { label: '隐私政策', href: '#' },
-    { label: '服务条款', href: '#' },
+    { label: '隐私政策', href: '/legal/privacy' },
+    { label: '服务条款', href: '/legal/terms' },
   ],
 }
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { cn } from '@/lib/utils'
 import { 
   Layers, 
   PenTool, 
@@ -81,28 +82,34 @@ export function FeaturesSection() {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
-            <Card 
+            <div 
               key={feature.title}
               data-index={index}
-              className={`border-border/50 bg-card/50 backdrop-blur transition-all duration-500 hover:bg-card/80 hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/5 group ${
+              className={cn(
+                "relative group transition-all duration-700",
                 visibleCards.includes(index) 
                   ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-8'
-              }`}
+              )}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <CardHeader>
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110">
-                  <feature.icon className="w-6 h-6 text-primary transition-transform duration-300 group-hover:scale-110" />
-                </div>
-                <CardTitle className="text-xl">{feature.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  {feature.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
+              {/* Glowing Edge Effect */}
+              <div className="absolute -inset-[1px] bg-gradient-to-b from-primary/50 via-primary/5 to-transparent rounded-[13px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[0.5px]" />
+              
+              <Card className="relative h-full border-border/50 bg-card/50 backdrop-blur transition-all duration-500 group-hover:bg-card/80 group-hover:scale-[1.01] group-hover:shadow-2xl group-hover:shadow-primary/5">
+                <CardHeader>
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110">
+                    <feature.icon className="w-6 h-6 text-primary transition-transform duration-300 group-hover:scale-110" />
+                  </div>
+                  <CardTitle className="text-xl">{feature.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-base">
+                    {feature.description}
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </div>
           ))}
         </div>
       </div>
