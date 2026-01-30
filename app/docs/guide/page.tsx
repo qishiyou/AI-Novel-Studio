@@ -1,5 +1,5 @@
 import React from 'react'
-import { BookOpen, PenTool, Sparkles, Layers, Wand2, Download } from 'lucide-react'
+import { BookOpen, PenTool, Sparkles, Layers, Wand2, Download, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Navbar } from '@/components/landing/navbar'
