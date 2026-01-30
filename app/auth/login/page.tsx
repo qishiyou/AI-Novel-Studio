@@ -78,7 +78,7 @@ export default function LoginPage() {
           {/* Logo */}
           <div className="flex items-center gap-3 font-bold text-2xl group cursor-default">
             <div className="w-10 h-10 overflow-hidden flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              <img src="/logo.svg" alt="Logo" className="w-full h-full object-cover" />
+              <img src="/logo.png" alt="Logo" className="w-full h-full object-cover" />
             </div>
             <span className="tracking-tight">AI Novel Studio</span>
           </div>
