@@ -40,7 +40,7 @@ export function Navbar() {
               <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/25">
                 <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
               </div>
-              <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-accent animate-pulse" />
+              <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
             </div>
             <div className="flex flex-col">
               <span className="font-bold text-lg text-foreground tracking-tight">AI Novel Studio</span>
