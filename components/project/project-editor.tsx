@@ -1316,16 +1316,6 @@ export function ProjectEditor({ project, structure: initialStructure, characters
                         )}
                         <span className="ml-2">{currentChapter?.content ? '重新生成' : 'AI生成'}</span>
                       </Button>
-                      <Button
-                        variant="secondary"
-                        size="sm"
-                        onClick={() => continueChapter(activeChapter)}
-                        disabled={isGenerating || isContinuing || !currentChapter?.content}
-                        className="gap-2"
-                      >
-                        <Zap className={`w-4 h-4 ${isContinuing ? 'animate-pulse text-yellow-500' : ''}`} />
-                        <span>{isContinuing ? '正在续写...' : 'AI续写'}</span>
-                      </Button>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button
@@ -1366,7 +1356,7 @@ export function ProjectEditor({ project, structure: initialStructure, characters
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent className="flex-1 p-0 flex flex-col">
+                <CardContent className="flex-1 p-0 flex flex-col relative group">
                   <Textarea
                     value={streamingContent || currentChapter?.content || ''}
                     onChange={(e) => {
@@ -1380,6 +1370,29 @@ export function ProjectEditor({ project, structure: initialStructure, characters
                     className="flex-1 min-h-[600px] resize-none border-0 rounded-none focus-visible:ring-0 bg-transparent p-8 text-lg leading-relaxed overflow-y-auto font-serif"
                     disabled={isGenerating}
                   />
+                  
+                  {/* Inline Continue Button */}
+                  {currentChapter?.content && !isGenerating && (
+                    <div className="absolute bottom-8 right-8 flex items-center gap-2">
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        onClick={() => continueChapter(activeChapter)}
+                        disabled={isContinuing}
+                        className="rounded-full shadow-lg border border-primary/20 hover:scale-105 transition-all gap-2 h-9 px-4"
+                      >
+                        <Zap className={`w-4 h-4 ${isContinuing ? 'animate-pulse text-yellow-500' : ''}`} />
+                        <span className="font-medium">{isContinuing ? '正在补全中断内容...' : '在此继续写下去'}</span>
+                      </Button>
+                      {isContinuing && (
+                        <div className="flex items-center gap-1">
+                          <span className="flex h-2 w-2 rounded-full bg-primary animate-bounce [animation-delay:-0.3s]"></span>
+                          <span className="flex h-2 w-2 rounded-full bg-primary animate-bounce [animation-delay:-0.15s]"></span>
+                          <span className="flex h-2 w-2 rounded-full bg-primary animate-bounce"></span>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </CardContent>
                 <div className="px-4 py-2 border-t border-border/50 flex items-center justify-between text-xs text-muted-foreground">
                   <span>字数：{(streamingContent || currentChapter?.content || '').length}</span>
