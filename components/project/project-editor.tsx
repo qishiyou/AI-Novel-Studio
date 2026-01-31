@@ -111,7 +111,6 @@ export function ProjectEditor({ project, structure: initialStructure, characters
   const [error, setError] = useState<string | null>(null)
   const [generatingProgress, setGeneratingProgress] = useState<string>('')
   const [localWordsPerChapter, setLocalWordsPerChapter] = useState(project.words_per_chapter)
-  const [maxWordsPerChapter, setMaxWordsPerChapter] = useState(Math.round(project.words_per_chapter * 1.5))
   const [wordCountStrictness, setWordCountStrictness] = useState<'normal' | 'strict'>('strict')
 
   const router = useRouter()
@@ -409,7 +408,6 @@ export function ProjectEditor({ project, structure: initialStructure, characters
         title: project.title,
         genre: project.genre,
         wordsPerChapter: localWordsPerChapter,
-        maxWords: maxWordsPerChapter,
         strictMode: wordCountStrictness === 'strict',
         structure: {
           worldSetting: structure.world_building,
@@ -1168,25 +1166,14 @@ export function ProjectEditor({ project, structure: initialStructure, characters
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="flex items-center gap-2 px-3 py-1 bg-secondary/50 rounded-lg border border-border/50">
-                        <span className="text-xs text-muted-foreground whitespace-nowrap">字数范围:</span>
+                        <span className="text-xs text-muted-foreground whitespace-nowrap">目标字数:</span>
                         <input
                           type="number"
                           value={localWordsPerChapter}
                           onChange={(e) => setLocalWordsPerChapter(parseInt(e.target.value) || 0)}
-                          className="w-14 bg-transparent border-none text-sm font-medium focus:ring-0 p-0 text-primary text-right"
+                          className="w-16 bg-transparent border-none text-sm font-medium focus:ring-0 p-0 text-primary"
                           min={500}
                           max={15000}
-                          title="最小字数"
-                        />
-                        <span className="text-muted-foreground">-</span>
-                        <input
-                          type="number"
-                          value={maxWordsPerChapter}
-                          onChange={(e) => setMaxWordsPerChapter(parseInt(e.target.value) || 0)}
-                          className="w-14 bg-transparent border-none text-sm font-medium focus:ring-0 p-0 text-primary"
-                          min={500}
-                          max={15000}
-                          title="最大字数"
                         />
                         <div className="h-4 w-px bg-border/50 mx-1" />
                         <button

@@ -3,7 +3,7 @@ import { streamChatCompletion, DEEPSEEK_MODELS } from '@/lib/deepseek';
 
 export async function POST(req: Request) {
   try {
-    const { title, theme, genre, structure, chapter, wordsPerChapter, maxWords, previousChapter, guidance, strictMode } = await req.json();
+    const { title, theme, genre, structure, chapter, wordsPerChapter, previousChapter, guidance, strictMode } = await req.json();
 
     // Validate structure and characters
     if (!structure || !structure.mainCharacters || !Array.isArray(structure.mainCharacters)) {
@@ -15,10 +15,9 @@ export async function POST(req: Request) {
 要求：
 1. 严格遵循章节大纲，但可以在细节上进行发挥。
 2. 描写生动细腻，注重环境渲染和心理刻画，对话自然流畅。
-3. **情节衔接**：必须紧密衔接上一章的末尾内容。如果上一章在某个场景或对话中结束，本章应自然延续或从合理的时空跳转开始。
-4. **字数控制**：本章正文字数**必须在 ${wordsPerChapter} 到 ${maxWords || wordsPerChapter * 1.5} 字之间**。
+3. **情节衔接**：必须紧密衔接上一章的末尾内容。如果上一章在某个场景 or 对话中结束，本章应自然延续或从合理的时空跳转开始。
+4. **字数控制**：本章正文字数**必须${strictMode ? '不得低于' : '达到约为'} ${wordsPerChapter} 字**。
    - ${strictMode ? `这是一项硬性指标。如果情节不足以支撑该字数，请通过增加环境细节描写、人物内心独白、细腻的动作刻画以及生动的对话来丰富内容。严禁敷衍了事。` : `请尽量保证内容丰富且完整。`}
-   - 如果内容过长，请在接近 ${maxWords || wordsPerChapter * 1.5} 字时寻找合适的切入点进行收尾。
 5. **内容深度**：不要为了凑字数而重复，而是要深入挖掘角色的情感冲突和场景的氛围感。
 6. **完整性**：每一章必须有一个相对完整的段落结束，不要在句子中途断开。
 7. 直接输出正文内容，不要包含标题或其他解释性文字。`;
