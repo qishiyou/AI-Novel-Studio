@@ -3,7 +3,7 @@ import { streamChatCompletion, DEEPSEEK_MODELS } from '@/lib/deepseek';
 
 export async function POST(req: Request) {
   try {
-    const { title, theme, genre, structure, chapter, wordsPerChapter, previousChapter, guidance, strictMode } = await req.json();
+    const { title, theme, genre, structure, chapter, wordsPerChapter, previousChapter, guidance, strictMode, isContinue } = await req.json();
 
     // Validate structure and characters
     if (!structure || !structure.mainCharacters || !Array.isArray(structure.mainCharacters)) {
@@ -11,12 +11,12 @@ export async function POST(req: Request) {
       throw new Error('故事架构中缺少角色信息，请先生成故事架构');
     }
 
-    const systemPrompt = `你是一位专业的小说创作者。请根据小说大纲和上下文，创作第 ${chapter.number} 章的正文内容。
+    const systemPrompt = `你是一位专业的小说创作者。请根据小说大纲和上下文，${isContinue ? '续写' : '创作'}第 ${chapter.number} 章的正文内容。
 要求：
 1. **严格遵循章节大纲**：必须且仅能围绕提供的【本章创作任务】中的大纲内容进行展开。严禁脱离大纲自行构思无关情节。
 2. 描写生动细腻，注重环境渲染和心理刻画，对话自然流畅。
-3. **情节衔接**：必须紧密衔接上一章的末尾内容。如果上一章在某个场景 or 对话中结束，本章应自然延续或从合理的时空跳转开始。
-4. **字数控制**：本章正文字数**必须${strictMode ? '不得低于' : '达到约为'} ${wordsPerChapter} 字**。
+3. **情节衔接**：必须紧密衔接${isContinue ? '当前正文的末尾' : '上一章的末尾'}内容。${isContinue ? '请直接从当前正文断开的地方开始续写，保持语气、风格、人称完全一致，确保读者读起来没有任何断裂感。' : '如果上一章在某个场景 or 对话中结束，本章应自然延续或从合理的时空跳转开始。'}
+4. **字数控制**：${isContinue ? '本次续写' : '本章'}正文字数**必须${strictMode ? '不得低于' : '达到约为'} ${isContinue ? 2000 : wordsPerChapter} 字**。
    - ${strictMode ? `这是一项硬性指标。如果情节不足以支撑该字数，请通过增加环境细节描写、人物内心独白、细腻的动作刻画以及生动的对话来丰富内容。严禁敷衍了事。` : `请尽量保证内容丰富且完整。`}
 5. **纯净正文输出**：
    - **禁止**输出任何章节标题（如“第X章”、“标题”等）。
@@ -37,18 +37,20 @@ ${structure.mainCharacters.map((c: { name: string; role: string; description: st
   `- ${c.name}（${c.role}）：${c.description}`
 ).join('\n')}
 
-【上一章内容回顾】
+${isContinue ? `【当前已写正文（最后部分）】
+${chapter.currentContent}` : `【上一章内容回顾】
 ${previousChapter ? `
 章节：第 ${previousChapter.number} 章 ${previousChapter.title}
 大纲：${previousChapter.outline}
 ${previousChapter.content ? `末尾内容（用于衔接）：\n...${previousChapter.content}` : ''}
-` : '这是全书的第一章。'}
+` : '这是全书的第一章。'}`}
 
 【本章创作任务】
 章节：第 ${chapter.number} 章 ${chapter.title}
 本章大纲：${chapter.outline}
+${guidance ? `特别要求：${guidance}` : ''}
 
-请开始创作第 ${chapter.number} 章的正文，确保开头与上一章末尾完美衔接：`;
+请开始${isContinue ? '续写' : '创作'}第 ${chapter.number} 章的正文${isContinue ? '' : '，确保开头与上一章末尾完美衔接'}：`;
 
     const stream = await streamChatCompletion([
       { role: 'system', content: systemPrompt },

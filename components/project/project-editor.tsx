@@ -108,6 +108,7 @@ export function ProjectEditor({ project, structure: initialStructure, characters
   const [isGenerating, setIsGenerating] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [streamingContent, setStreamingContent] = useState('')
+  const [isContinuing, setIsContinuing] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [generatingProgress, setGeneratingProgress] = useState<string>('')
   const [localWordsPerChapter, setLocalWordsPerChapter] = useState(project.words_per_chapter)
@@ -519,7 +520,107 @@ export function ProjectEditor({ project, structure: initialStructure, characters
     } finally {
       setIsGenerating(false)
     }
-  }, [chapters, structure, characters, project, supabase])
+  }, [chapters, structure, characters, project, supabase, localWordsPerChapter, wordCountStrictness])
+
+  // AI 续写功能
+  const continueChapter = useCallback(async (chapterIndex: number) => {
+    const chapter = chapters[chapterIndex]
+    if (!chapter || !structure || !chapter.content) return
+
+    setError(null)
+    setIsContinuing(true)
+    setStreamingContent('')
+    setGeneratingProgress(`正在续写第 ${chapter.chapter_number} 章...`)
+
+    try {
+      const requestBody = {
+        title: project.title,
+        genre: project.genre,
+        wordsPerChapter: localWordsPerChapter,
+        strictMode: wordCountStrictness === 'strict',
+        isContinue: true,
+        structure: {
+          worldSetting: structure.world_building,
+          synopsis: structure.synopsis,
+          mainCharacters: characters,
+        },
+        chapter: {
+          number: chapter.chapter_number,
+          title: chapter.title,
+          outline: chapter.outline,
+          currentContent: chapter.content.slice(-2000), // 取最后2000字作为续写上下文
+        },
+      }
+
+      const response = await fetch('/api/generate-chapter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+        throw new Error(errorData.error || errorData.details || `续写失败 (${response.status})`)
+      }
+
+      if (!response.body) throw new Error('服务器未返回内容')
+
+      const reader = response.body.getReader()
+      const decoder = new TextDecoder()
+      let continuedText = ''
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+
+        const chunk = decoder.decode(value)
+        const lines = chunk.split('\n')
+
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            const data = line.slice(6)
+            if (data === '[DONE]') continue
+            try {
+              const parsed = JSON.parse(data)
+              if (parsed.content) {
+                // 清洗内容：移除 Markdown 标题标签和多余的小节标号
+                let cleanedContent = parsed.content
+                  .replace(/^#+\s?.*$/gm, '') // 移除 #, ##, ### 等开头的标题行
+                  .replace(/^\s*(一|二|三|四|五|六|七|八|九|十|第[一二三四五六七八九十0-9]+)\s*[、\.\s].*$/gm, '') // 移除 一、 二、 或 第一章 等行
+                
+                continuedText += cleanedContent
+                setStreamingContent(continuedText)
+              }
+            } catch { }
+          }
+        }
+      }
+
+      const newFullContent = chapter.content + continuedText
+      const wordCount = newFullContent.length
+
+      await supabase
+        .from('novel_chapters')
+        .update({
+          content: newFullContent,
+          word_count: wordCount,
+        })
+        .eq('id', chapter.id)
+
+      setChapters(prev => prev.map((c, idx) =>
+        idx === chapterIndex
+          ? { ...c, content: newFullContent, word_count: wordCount }
+          : c
+      ))
+    } catch (error) {
+      console.error('Error continuing chapter:', error)
+      setError(error instanceof Error ? error.message : '续写失败')
+    } finally {
+      setIsContinuing(false)
+      setGeneratingProgress('')
+      setStreamingContent('')
+    }
+  }, [chapters, structure, characters, project, supabase, localWordsPerChapter, wordCountStrictness])
 
   // Save chapter content
   const saveChapter = useCallback(async (chapterIndex: number, content: string) => {
@@ -1205,7 +1306,7 @@ export function ProjectEditor({ project, structure: initialStructure, characters
                       <Button
                         size="sm"
                         onClick={() => generateChapter(activeChapter)}
-                        disabled={isGenerating}
+                        disabled={isGenerating || isContinuing}
                       >
                         {isGenerating ? (
                           <Loader2 className="w-4 h-4 animate-spin" />
@@ -1213,6 +1314,16 @@ export function ProjectEditor({ project, structure: initialStructure, characters
                           <Sparkles className="w-4 h-4" />
                         )}
                         <span className="ml-2">{currentChapter?.content ? '重新生成' : 'AI生成'}</span>
+                      </Button>
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        onClick={() => continueChapter(activeChapter)}
+                        disabled={isGenerating || isContinuing || !currentChapter?.content}
+                        className="gap-2"
+                      >
+                        <Zap className={`w-4 h-4 ${isContinuing ? 'animate-pulse text-yellow-500' : ''}`} />
+                        <span>{isContinuing ? '正在续写...' : 'AI续写'}</span>
                       </Button>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
