@@ -462,7 +462,12 @@ export function ProjectEditor({ project, structure: initialStructure, characters
             try {
               const parsed = JSON.parse(data)
               if (parsed.content) {
-                fullContent += parsed.content
+                // 清洗内容：移除 Markdown 标题标签和多余的小节标号
+                let cleanedContent = parsed.content
+                  .replace(/^#+\s?.*$/gm, '') // 移除 #, ##, ### 等开头的标题行
+                  .replace(/^\s*(一|二|三|四|五|六|七|八|九|十|第[一二三四五六七八九十0-9]+)\s*[、\.\s].*$/gm, '') // 移除 一、 二、 或 第一章 等行
+                
+                fullContent += cleanedContent
                 setStreamingContent(fullContent)
               }
             } catch {
