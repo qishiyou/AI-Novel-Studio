@@ -58,6 +58,7 @@ export async function streamChatCompletion(
   options: {
     model?: string;
     temperature?: number;
+    max_tokens?: number;
   } = {}
 ) {
   const apiKey = process.env.DEEPSEEK_API_KEY;
@@ -73,6 +74,7 @@ export async function streamChatCompletion(
       model: options.model || DEEPSEEK_MODELS.chat,
       messages,
       temperature: options.temperature ?? 0.7,
+      max_tokens: options.max_tokens || 4096, // 默认 4K，针对 reasoner 建议设为 8K
       stream: true,
     }),
   });

@@ -110,6 +110,9 @@ export function ProjectEditor({ project, structure: initialStructure, characters
   const [streamingContent, setStreamingContent] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [generatingProgress, setGeneratingProgress] = useState<string>('')
+  const [localWordsPerChapter, setLocalWordsPerChapter] = useState(project.words_per_chapter)
+  const [maxWordsPerChapter, setMaxWordsPerChapter] = useState(Math.round(project.words_per_chapter * 1.5))
+  const [wordCountStrictness, setWordCountStrictness] = useState<'normal' | 'strict'>('strict')
 
   const router = useRouter()
   const supabase = createClient()
@@ -399,26 +402,31 @@ export function ProjectEditor({ project, structure: initialStructure, characters
     setGeneratingProgress(`正在生成第 ${chapter.chapter_number} 章内容...`)
 
     try {
-      const previousChapters = chapters.slice(0, chapterIndex).map(c => ({
-        title: c.title,
-        summary: c.outline,
-      }))
+      // 获取上一章的实际内容，用于衔接
+      const previousChapterContent = chapterIndex > 0 ? chapters[chapterIndex - 1].content : null
 
       const requestBody = {
         title: project.title,
         genre: project.genre,
-        wordsPerChapter: project.words_per_chapter,
+        wordsPerChapter: localWordsPerChapter,
+        maxWords: maxWordsPerChapter,
+        strictMode: wordCountStrictness === 'strict',
         structure: {
           worldSetting: structure.world_building,
           synopsis: structure.synopsis,
-          mainCharacters: characters, // 确保字段名与 generate-chapter API 一致
+          mainCharacters: characters,
         },
         chapter: {
           number: chapter.chapter_number,
           title: chapter.title,
           outline: chapter.outline,
         },
-        previousChapters,
+        previousChapter: chapterIndex > 0 ? {
+          number: chapters[chapterIndex - 1].chapter_number,
+          title: chapters[chapterIndex - 1].title,
+          outline: chapters[chapterIndex - 1].outline,
+          content: previousChapterContent ? previousChapterContent.slice(-1000) : null // 只取末尾1000字作为衔接参考
+        } : null,
       }
 
       console.log(`Generating chapter ${chapter.chapter_number}:`, chapter.title)
@@ -1159,6 +1167,40 @@ export function ProjectEditor({ project, structure: initialStructure, characters
                       <CardDescription>{currentChapter?.outline}</CardDescription>
                     </div>
                     <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 px-3 py-1 bg-secondary/50 rounded-lg border border-border/50">
+                        <span className="text-xs text-muted-foreground whitespace-nowrap">字数范围:</span>
+                        <input
+                          type="number"
+                          value={localWordsPerChapter}
+                          onChange={(e) => setLocalWordsPerChapter(parseInt(e.target.value) || 0)}
+                          className="w-14 bg-transparent border-none text-sm font-medium focus:ring-0 p-0 text-primary text-right"
+                          min={500}
+                          max={15000}
+                          title="最小字数"
+                        />
+                        <span className="text-muted-foreground">-</span>
+                        <input
+                          type="number"
+                          value={maxWordsPerChapter}
+                          onChange={(e) => setMaxWordsPerChapter(parseInt(e.target.value) || 0)}
+                          className="w-14 bg-transparent border-none text-sm font-medium focus:ring-0 p-0 text-primary"
+                          min={500}
+                          max={15000}
+                          title="最大字数"
+                        />
+                        <div className="h-4 w-px bg-border/50 mx-1" />
+                        <button
+                          onClick={() => setWordCountStrictness(prev => prev === 'strict' ? 'normal' : 'strict')}
+                          className={`text-[10px] px-1.5 py-0.5 rounded transition-colors ${
+                            wordCountStrictness === 'strict' 
+                              ? 'bg-primary text-primary-foreground font-bold' 
+                              : 'bg-muted text-muted-foreground'
+                          }`}
+                          title={wordCountStrictness === 'strict' ? '严格模式：AI会竭尽全力达到目标字数' : '普通模式：字数仅作为参考'}
+                        >
+                          {wordCountStrictness === 'strict' ? '严格' : '普通'}
+                        </button>
+                      </div>
                       <Button
                         variant="outline"
                         size="sm"
