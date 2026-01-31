@@ -248,14 +248,14 @@ export default function CreatePage() {
                     value={[formData.wordsPerChapter]}
                     onValueChange={([value]) => setFormData({ ...formData, wordsPerChapter: value })}
                     min={500}
-                    max={10000}
+                    max={15000}
                     step={100}
                     className="py-2"
                   />
                   <div className="flex justify-between text-xs text-muted-foreground">
                     <span>500字</span>
-                    <span>5000字</span>
-                    <span>10000字</span>
+                    <span>7500字</span>
+                    <span>15000字</span>
                   </div>
                 </div>
 
